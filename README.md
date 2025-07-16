@@ -1,5 +1,7 @@
 # HarmonyOS Electron HAP
 
+English | [简体中文](./README-CN.md)
+
 A HarmonyOS Application Package (HAP) project based on the HarmonyOS platform that enables running Electron applications on HarmonyOS devices.
 
 ## Project Structure
