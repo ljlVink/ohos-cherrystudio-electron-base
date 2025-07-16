@@ -1,5 +1,7 @@
 # HarmonyOS Electron HAP
 
+[English](./README.md) | 简体中文
+
 这是一个基于 HarmonyOS 平台的 Electron 应用程序包（HAP）项目，支持在鸿蒙设备上运行 Electron 应用。
 
 ## 项目结构
