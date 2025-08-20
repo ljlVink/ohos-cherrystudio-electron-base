@@ -43,6 +43,7 @@ import { WindowStyle, IStyleData, IUpdateStyle } from '../common/WindowStyle';
 import { CommandType } from '../common/Constants';
 import { PermissionManagerAdapter } from '../adapter/PermissionManagerAdapter';
 import { ConfigurationConstant } from '@kit.AbilityKit';
+import common from '@ohos.app.ability.common';
 
 const TAG: string = 'WebAbility';
 
@@ -81,7 +82,19 @@ export class WebAbility extends WebBaseAbility {
         LogUtil.error(TAG, 'Failed to obtain the main window: ' + JSON.stringify(err));
         return;
       }
-      
+      if (deviceInfo.deviceType === 'tablet') {
+        let names = [];
+        data.setWindowSystemBarEnable(names).then(() => {
+          console.info('Succeeded in setting the system bar to be visible.');
+        });
+        try {
+          data.setWindowLayoutFullScreen(true).then(() => {
+            console.info('Succeeded in setting the window layout to full-screen mode.');
+          });
+        } catch (e) {
+          LogUtil.warn(TAG, 'setWindowLayoutFullScreen not supported: ' + JSON.stringify(e));
+        }
+      } 
       try {
         data.on('windowStatusChange', (status) => {
           this.nativeContext.OnWindowStatusChange(this.xcomponentId, status);
@@ -175,14 +188,16 @@ export class WebAbility extends WebBaseAbility {
         };
         window.setDecorButtonStyle(buttonStyle);
       }
-      window.setWindowTitleMoveEnabled(!this.hideTitleBar);
+      //pad changes
+      //window.setWindowTitleMoveEnabled(!this.hideTitleBar);
       this.maximizable = this.maximizable && !this.hideTitleBar;
       this.minimizable = this.minimizable && !this.hideTitleBar;
       this.closable = this.closable && !this.hideTitleBar;
       window.setWindowTitleButtonVisible(this.maximizable, this.minimizable, this.closable);
-      window.setWindowTopmost(this.alwaysOntop);
-      window.setResizeByDragEnabled(this.resizable);
-      windowStage.setWindowModal(this.isModal);
+      //pad changes
+      //window.setWindowTopmost(this.alwaysOntop);
+      //window.setResizeByDragEnabled(this.resizable);
+      //windowStage.setWindowModal(this.isModal);
       if (this.isPanel)
         window.setTitleAndDockHoverShown(false, false);
 
