@@ -26,9 +26,6 @@
         "name": "ohos.permission.PRINT"
       },
       {
-        "name": "ohos.permission.PREPARE_APP_TERMINATE"
-      },
-      {
         "name": "ohos.permission.ACCESS_BIOMETRIC"
       },
       {
